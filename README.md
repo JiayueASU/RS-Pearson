@@ -49,17 +49,65 @@ In [2]:
 
 ```Python
 # An example nested dictionary
-dataset={'A': {'Article1': 5,
-               'Article2': 3,
-               'Article3': 3,
-               'Article4': 3,
-               'Article5': 2,
-               'Article6': 3},
-         'B': {'Article1': 2,
-               'Article3': 5,
-               'Article4': 3,
-               'Article6': 4}}
+dataset={'A': {'article 1': 5,
+               'article 2': 3,
+               'article 3': 3,
+               'article 4': 3,
+               'article 5': 2,
+               'article 6': 3},
+         'B': {'article 1': 2,
+               'article 3': 5,
+               'article 4': 3,
+               'article 6': 4}}
 ```
 
-Here, @dataset is a nested dictionary with the dictionary user @'A' and @'B'. Each dictionary has its own key (Article #) and value (Rating).
+Here, `dataset` is a nested dictionary with the dictionary user `'A'` and `'B'`. Each dictionary has its own key (Article #) and value (Rating). 
 
+Dataframe is also a good option to store your data:
+
+In [3]:
+
+```python
+dataset_df=pd.DataFrame(dataset)
+dataset_df.fillna("Null",inplace=True)
+print(dataset_df)
+```
+
+Out [1]:
+
+| Item/User | 'A'  | 'B'  |
+| :-------: | :--: | :--: |
+| article 1 |  5   |  2   |
+| article 2 |  3   | Null |
+| article 3 |  3   |  5   |
+| article 4 |  3   |  3   |
+| article 5 |  2   | Null |
+| article 6 |  3   |  4   |
+
+### Step 2: Generate a list to store all unique items
+
+In [4]:
+
+```Python
+def unique_items():
+    unique_items_list = []
+    for user in dataset.keys():
+        for items in dataset[user]:
+            unique_items_list.append(items)
+    s=set(unique_items_list)
+    # s = {'article 1', 'article 2', 'article 3', 'article 4', 'article 5', 'article 6'}
+    unique_items_list=list(s)
+    return unique_items_list
+
+print(unique_items())
+```
+
+Out [2]:
+
+['article 1', 'article 2', 'article 3', 'article 4', 'article 5', 'article 6']
+
+### Step 3: User-based Collaborative Filtering Algorithm (Pearson Similarity)
+
+The standard method of Collaborative Filtering is known as *Nearest Neighborhood algorithm*. There are *user-based CF* and *item-based CF*. In this repository, we focus on the user-based CF algorithm with *Pearson Similarity*.
+
+Suppose we have an $M /time N$ matrix of ratings
