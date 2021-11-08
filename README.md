@@ -110,7 +110,104 @@ Out [2]:
 
 The standard method of Collaborative Filtering (CF) is known as *Nearest Neighborhood algorithm*. There are *user-based CF* and *item-based CF*. In this repository, we focus on the user-based CF algorithm with *Pearson Similarity*.
 
-Suppose we have an *M* × *N* matrix of ratings, with *M* users and *N* article. Now we want to predict the rating *r(i, j)* if target user *i = 1, ..., M* did not rate the article *j = 1, ..., N*. The process is to calculate the similarities between target user *i* and all other users, select the top *X* similar users, and take the weighted average of ratings from these *X* users with similarities as weights.
+Suppose we have an *M* × *N* matrix of ratings, with *M* users and *N* article. Now we want to predict the rating *r(i, j)* if target user *i = 1, ..., M* did not rate the article *j = 1, ..., N*. Basically, the idea is to find the most similar users to your target user (nearest neighbors) and weight their ratings of an item as the prediction of the rating of this item for target user. The process is to calculate the similarities between target user *i* and all other users, select the top *X* similar users, and take the weighted average of ratings from these *X* users with similarities as weights. Pearson correlation is used to describe the similarity between the users, which is calulated with the bottom equation:
 
 <img src="https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true" width="500" height="100">
+
+In [5]:
+
+```python
+def user_corelation(user1,user2):
+    both_rated = {}
+    for item in dataset[user1]:
+        if item in dataset[user2]:
+            both_rated[item] = 1
+
+    number_of_ratings = len(both_rated)
+    if number_of_ratings == 0:
+        return 0
+    
+    # Calculate E(user1) and E(user2)
+    user1_preferences_sum = sum([dataset[user1][item] for item in both_rated])
+    user2_preferences_sum = sum([dataset[user2][item] for item in both_rated])
+
+    # Sum up the squares of preferences of each user, calculate E(user1^2) and E(user2^2)
+    user1_square_preferences_sum = sum([pow(dataset[user1][item], 2) for item in both_rated])
+    user2_square_preferences_sum = sum([pow(dataset[user2][item], 2) for item in both_rated])
+
+    # Sum up the product value of both preferences for each item, calculate E(user1 * user2)
+    product_sum_of_both_users = sum([dataset[user1][item] * dataset[user2][item] for item in both_rated])
+
+    # Calculate the pearson correlation, 
+    # which is equal to the ratio between (E(user1 * user2) - E(user1) * E(user2)) and
+    # the square root value of (E(user1^2) - E(user1)^2) * (E(user2^2) - E(user2)^2)
+    numerator_value = product_sum_of_both_users - (
+    user1_preferences_sum * user2_preferences_sum / number_of_ratings)
+    denominator_value = sqrt((user1_square_preferences_sum - pow(user1_preferences_sum, 2) / number_of_ratings) * (
+    user2_square_preferences_sum - pow(user2_preferences_sum, 2) / number_of_ratings))
+    if denominator_value == 0:
+        return 0
+    else:
+        r = numerator_value / denominator_value
+        return r
+```
+
+In [6]:
+
+```python
+def most_similar_users(target_user,no_of_users):    
+    # Using list comprehension for finding pearson similarity between users
+    scores = [(user_corelation(target_user,other_user),other_user) for other_user in dataset if other_user !=target_user]
+    
+    # Sort the scores in descending order
+    scores.sort(reverse=True)
+    
+    # Return the scores between the target user & other users
+    return scores[0:no_of_users]
+  
+def target_article_to_users(target_user):
+    target_user_article_lst = []
+    unique_list =unique_items()
+    for articles in dataset[target_user]:
+        target_user_article_lst.append(articles)
+    s = set(unique_list)
+    recommended_articles = list(s.difference(target_user_article_lst))
+    a = len(recommended_articles)
+    if a == 0:
+        return 0
+    return recommended_articles,target_user_article_lst
+  
+def recommendation_phase(user):
+    # Gets recommendations for a user by using a weighted average of every other user's rankings
+    totals = {}  #empty dictionary
+    simSums = {} # empty dictionary
+    for other in dataset:
+        # don't compare me to myself
+        if other == user:
+            continue
+        sim = user_corelation(user, other)
+
+        # ignore scores of zero or lower
+        if sim <= 0:
+            continue
+        for item in dataset[other]:
+            # only score article   s i haven't seen yet
+            if item not in dataset[user]:
+                # Similrity * score
+                totals.setdefault(item, 0)
+                totals[item] += dataset[other][item] * sim
+                # sum of similarities
+                simSums.setdefault(item, 0)
+                simSums[item] += sim
+                # Create the normalized list
+
+    rankings = [(total / simSums[item], item) for item, total in totals.items()]
+    rankings.sort(reverse=True)
+#   return rankings
+    # returns the recommended items
+    recommendataions_list = [(recommend_item,score) for score, recommend_item in rankings]
+    return recommendataions_list
+```
+
+
 
