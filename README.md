@@ -111,3 +111,4 @@ Out [2]:
 The standard method of Collaborative Filtering is known as *Nearest Neighborhood algorithm*. There are *user-based CF* and *item-based CF*. In this repository, we focus on the user-based CF algorithm with *Pearson Similarity*.
 
  *M* × *N* 
+ Suppose we have an *M* × *N* matrix of ratings, with user uᵢ and article
