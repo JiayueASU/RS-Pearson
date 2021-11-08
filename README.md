@@ -68,8 +68,8 @@ Dataframe is also a good option to store your data:
 In [3]:
 
 ```python
-dataset_df=pd.DataFrame(dataset)
-dataset_df.fillna("Null",inplace=True)
+dataset_df = pd.DataFrame(dataset)
+dataset_df.fillna("Null",inplace = True)
 print(dataset_df)
 ```
 
@@ -94,9 +94,9 @@ def unique_items():
     for user in dataset.keys():
         for items in dataset[user]:
             unique_items_list.append(items)
-    s=set(unique_items_list)
+    s = set(unique_items_list)
     # s = {'article 1', 'article 2', 'article 3', 'article 4', 'article 5', 'article 6'}
-    unique_items_list=list(s)
+    unique_items_list = list(s)
     return unique_items_list
 
 print(unique_items())
@@ -167,7 +167,7 @@ def most_similar_users(target_user,no_of_users):
   
 def target_article_to_users(target_user):
     target_user_article_lst = []
-    unique_list =unique_items()
+    unique_list = unique_items()
     for articles in dataset[target_user]:
         target_user_article_lst.append(articles)
     s = set(unique_list)
