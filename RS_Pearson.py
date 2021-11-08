@@ -173,7 +173,7 @@ def recommendation_phase(user):
 
 # print(recommendation_phase('D'))
 # Output:
-# [(3.666666666666667, 'article   2'), (3.479274057836309, 'article   1'), (2.333333333333333, 'article   5')]
+# [(3.666666666666667, 'article 2'), (3.479274057836309, 'article 1'), (2.333333333333333, 'article 5')]
 
 print("Enter the target user")
 tp = input().title()
