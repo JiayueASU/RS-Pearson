@@ -112,5 +112,5 @@ The standard method of Collaborative Filtering (CF) is known as *Nearest Neighbo
 
 Suppose we have an *M* × *N* matrix of ratings, with *M* users and *N* article. Now we want to predict the rating *r(i, j)* if target user *i = 1, ..., M* did not rate the article *j = 1, ..., N*. The process is to calculate the similarities between target user *i* and all other users, select the top *X* similar users, and take the weighted average of ratings from these *X* users with similarities as weights.
 
-<img src="https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true" width="200" height="100">
+<img src="https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true" width="400" height="100">
 
