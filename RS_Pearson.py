@@ -40,8 +40,8 @@ dataset={'A': {'article 1': 5,
                'article 4': 4,
                'article 5': 1}}
 
-dataset_df=pd.DataFrame(dataset)
-dataset_df.fillna("Null",inplace=True)
+dataset_df = pd.DataFrame(dataset)
+dataset_df.fillna("Null",inplace = True)
 
 # print(dataset_df)
 
@@ -59,9 +59,9 @@ def unique_items():
     for user in dataset.keys():
         for items in dataset[user]:
             unique_items_list.append(items)
-    s=set(unique_items_list)
+    s = set(unique_items_list)
     # s = {'article   4', 'article   6', 'article   2', 'article   1', 'article   5', 'article   3'}
-    unique_items_list=list(s)
+    unique_items_list = list(s)
     return unique_items_list
 
 # print(unique_items())
@@ -121,7 +121,7 @@ def most_similar_users(target_user,no_of_users):
 
 def target_article_to_users(target_user):
     target_user_article_lst = []
-    unique_list =unique_items()
+    unique_list = unique_items()
     for articles in dataset[target_user]:
         target_user_article_lst.append(articles)
     s = set(unique_list)
@@ -176,21 +176,6 @@ def recommendation_phase(user):
 # [(3.666666666666667, 'article   2'), (3.479274057836309, 'article   1'), (2.333333333333333, 'article   5')]
 
 print("Enter the target user")
-tp = input().title()
-if tp in dataset.keys():
-    a = recommendation_phase(tp)
-    if a != -1 and len(dataset[tp]) < len(unique_items()):
-        print("Recommendation Using User based Collaborative Filtering:  ")
-        for webseries,weights in a:
-            print(webseries,'---->',weights)
-    else:
-        print("No more recommendation needed!")
-else:
-    print("user not found in the dataset..please try again")
-
-# print(most_similar_users('B',6))
-
-print("Enter the target user:")
 tp = input().title()
 if tp in dataset.keys():
     a = recommendation_phase(tp)
