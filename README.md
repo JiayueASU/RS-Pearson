@@ -209,5 +209,14 @@ def recommendation_phase(user):
     return recommendataions_list
 ```
 
+Out [3]:
+```
+Enter the target user
+D
+Recommendation Using User based Collaborative Filtering:  
+article 2 ----> 3.666666666666667
+article 1 ----> 3.479274057836309
+article 5 ----> 2.333333333333333
+```
 
 
