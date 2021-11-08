@@ -54,17 +54,6 @@ dataset_df.fillna("Null",inplace=True)
 # article   5      2      3  ...      3.0           1.0
 # article   6      3      3  ...      3.0           Null
 
-# def readingFile(filename):
-# 	f = open(filename,"r")
-# 	data = []
-# 	for row in f:
-# 		r = row.split(',')
-# 		e = [int(r[0]), int(r[1]), int(r[2])]
-# 		data.append(e)
-# 	return data
-#
-# dataset = readingFile("dataset.txt")
-
 def unique_items():
     unique_items_list = []
     for user in dataset.keys():
