@@ -110,7 +110,7 @@ Out [2]:
 
 The standard method of Collaborative Filtering is known as *Nearest Neighborhood algorithm*. There are *user-based CF* and *item-based CF*. In this repository, we focus on the user-based CF algorithm with *Pearson Similarity*.
 
-![equation](http://www.sciweavers.org/tex2img.php?eq=M+%5Ctimes+N=White&fc=Black&im=jpg&fs=12&ff=arev&edit=)
+![equation](http://www.sciweavers.org/tex2img.php?eq=M+%5Ctimes+N&im=jpg&fs=12&ff=arev&edit=)
 
 Suppose we have an ![formula](https://render.githubusercontent.com/render/math?math=M \times N) matrix of ratings, with user ![formula](https://render.githubusercontent.com/render/math?math=u_i)and article ![formula](https://render.githubusercontent.com/render/math?math=a_j), where ![formula](https://render.githubusercontent.com/render/math?math=i = 1,\cdots,M) and ![formula](https://render.githubusercontent.com/render/math?math=j = 1,\cdots,N).
 
