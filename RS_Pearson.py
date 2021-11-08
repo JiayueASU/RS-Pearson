@@ -189,3 +189,23 @@ else:
     print("user not found in the dataset..please try again")
 
 # print(most_similar_users('B',6))
+
+print("Enter the target user:")
+tp = input().title()
+if tp in dataset.keys():
+    a = recommendation_phase(tp)
+    if a != -1 and len(dataset[tp]) < len(unique_items()):
+        print("Recommendation Using User based Collaborative Filtering:  ")
+        for webseries,weights in a:
+            print(webseries,'---->',weights)
+    else:
+        print("No more recommendation needed!")
+else:
+    print("user not found in the dataset..please try again")
+    
+# Enter the target user:
+# D
+# Recommendation Using User based Collaborative Filtering:  
+# article 2 ----> 3.666666666666667
+# article 1 ----> 3.479274057836309
+# article 5 ----> 2.333333333333333
