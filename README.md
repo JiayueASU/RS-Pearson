@@ -114,5 +114,5 @@ Suppose we have an *M* × *N* matrix of ratings, with *M* users and *N* article.
 
 ![alt text](https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true)
 
-img src="https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true" width="100" height="100">
+<img src="https://github.com/JiayueASU/RS-Pearson/blob/main/pearson_sim.png?raw=true" width="100" height="100">
 
