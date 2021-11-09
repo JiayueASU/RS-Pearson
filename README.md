@@ -50,16 +50,16 @@ In [2]:
 
 ```Python
 # An example nested dictionary
-dataset={'A': {'article 1': 5,
-               'article 2': 3,
-               'article 3': 3,
-               'article 4': 3,
-               'article 5': 2,
-               'article 6': 3},
-         'B': {'article 1': 2,
-               'article 3': 5,
-               'article 4': 3,
-               'article 6': 4}}
+dataset = {'A': {'article 1': 5,
+                 'article 2': 3,
+                 'article 3': 3,
+                 'article 4': 3,
+                 'article 5': 2,
+                 'article 6': 3},
+           'B': {'article 1': 2,
+                 'article 3': 5,
+                 'article 4': 3,
+                 'article 6': 4}}
 ```
 
 Here, `dataset` is a nested dictionary with the dictionary user `'A'` and `'B'`. Each dictionary has its own key (Article #) and value (Rating). 
