@@ -103,7 +103,19 @@ print(readingFile("dataset.csv")
 ```
 
 Out [2]:
-defaultdict(<class 'dict'>, {'A': {'article 1': 5, 'article 2': 3, 'article 5': 2, 'article 4': 3, 'article 6': 3, 'article 3': 3}, 'B': {'article 1': 5, 'article 5': 3, 'article 2': 3, 'article 4': 5, 'article 3': 5, 'article 6': 3}, 'D': {'article 3': 5, 'article 4': 4, 'article 6': 4}, 'F': {'article 6': 3, 'article 4': 5, 'article 5': 3, 'article 3': 4, 'article 1': 3}, 'E': {'article 1': 4, 'article 3': 4, 'article 2': 4, 'article 6': 3, 'article 5': 2}, 'C': {'article 6': 4, 'article 3': 5, 'article 1': 2, 'article 4': 3}, 'G': {'article 4': 4, 'article 3': 4, 'article 5': 1}})
+
+defaultdict(<class 'dict'>, {'A': {'article 1': 5, 'article 2': 3, 'article 5': 2, 
+                                   'article 4': 3, 'article 6': 3, 'article 3': 3}, 
+                             'B': {'article 1': 5, 'article 5': 3, 'article 2': 3, 
+                                   'article 4': 5, 'article 3': 5, 'article 6': 3}, 
+                             'D': {'article 3': 5, 'article 4': 4, 'article 6': 4}, 
+                             'F': {'article 6': 3, 'article 4': 5, 'article 5': 3, 
+                                   'article 3': 4, 'article 1': 3}, 
+                             'E': {'article 1': 4, 'article 3': 4, 'article 2': 4, 
+                                   'article 6': 3, 'article 5': 2}, 
+                             'C': {'article 6': 4, 'article 3': 5, 'article 1': 2, 
+                                   'article 4': 3}, 
+                             'G': {'article 4': 4, 'article 3': 4, 'article 5': 1}})
 
 ### Step 2: Generate a list to store all unique items
 
