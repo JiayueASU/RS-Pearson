@@ -1,47 +1,78 @@
 import pandas as pd
 from math import sqrt
+import collections
 
-dataset={'A': {'article 1': 5,
-               'article 2': 3,
-               'article 3': 3,
-               'article 4': 3,
-               'article 5': 2,
-               'article 6': 3},
+dataset = {'A': {'article 1': 5,
+                 'article 2': 3,
+                 'article 3': 3,
+                 'article 4': 3,
+                 'article 5': 2,
+                 'article 6': 3},
 
-         'B': {'article 1': 5,
-               'article 2': 3,
-               'article 3': 5,
-               'article 4': 5,
-               'article 5': 3,
-               'article 6': 3},
+           'B': {'article 1': 5,
+                 'article 2': 3,
+                 'article 3': 5,
+                 'article 4': 5,
+                 'article 5': 3,
+                 'article 6': 3},
                
-         'C': {'article 1': 2,
-               'article 3': 5,
-               'article 4': 3,
-               'article 6': 4},
+           'C': {'article 1': 2,
+                 'article 3': 5,
+                 'article 4': 3,
+                 'article 6': 4},
+  
+           'D': {'article 3': 5,
+                 'article 4': 4,
+                 'article 6': 4},
 
-         'D': {'article 3': 5,
-               'article 4': 4,
-               'article 6': 4},
+           'E': {'article 1': 4,
+                 'article 2': 4,
+                 'article 3': 4,
+                 'article 5': 2,
+                 'article 6': 3},
 
-         'E': {'article 1': 4,
-               'article 2': 4,
-               'article 3': 4,
-               'article 5': 2,
-               'article 6': 3},
+           'F': {'article 1': 3,
+                 'article 3': 4,
+                 'article 4': 5,
+                 'article 5': 3,
+                 'article 6': 3},
 
-         'F': {'article 1': 3,
-               'article 3': 4,
-               'article 4': 5,
-               'article 5': 3,
-               'article 6': 3},
+           'G': {'article 3': 4,
+                 'article 4': 4,
+                 'article 5': 1}}
 
-         'G': {'article 3': 4,
-               'article 4': 4,
-               'article 5': 1}}
+# dataset = readingFile("dataset.csv")
 
-dataset_df = pd.DataFrame(dataset)
-dataset_df.fillna("Null",inplace = True)
+def readingFile(filename):
+    # If you need to load your data from a .csv file
+    f = open(filename, "r", encoding = 'UTF-8-sig')
+    temp = []
+    for row in f:
+        r = row.split(',')
+        e = [r[0], r[1], int(r[2])]
+        temp.append(e)
+    dataset = collections.defaultdict(dict)
+    for data in temp:
+        dataset[data[0]][data[1]] = data[2]
+    return dataset
+
+# print(readingFile("dataset.csv"))
+# Output:
+# defaultdict(<class 'dict'>, {'A': {'article 1': 5, 'article 2': 3, 'article 5': 2, 
+#                                    'article 4': 3, 'article 6': 3, 'article 3': 3}, 
+#                              'B': {'article 1': 5, 'article 5': 3, 'article 2': 3, 
+#                                    'article 4': 5, 'article 3': 5, 'article 6': 3}, 
+#                              'D': {'article 3': 5, 'article 4': 4, 'article 6': 4}, 
+#                              'F': {'article 6': 3, 'article 4': 5, 'article 5': 3, 
+#                                    'article 3': 4, 'article 1': 3}, 
+#                              'E': {'article 1': 4, 'article 3': 4, 'article 2': 4, 
+#                                    'article 6': 3, 'article 5': 2}, 
+#                              'C': {'article 6': 4, 'article 3': 5, 'article 1': 2, 
+#                                    'article 4': 3}, 
+#                              'G': {'article 4': 4, 'article 3': 4, 'article 5': 1}})
+
+# dataset_df=pd.DataFrame(dataset)
+# dataset_df.fillna("Null",inplace=True)
 
 # print(dataset_df)
 
@@ -59,9 +90,9 @@ def unique_items():
     for user in dataset.keys():
         for items in dataset[user]:
             unique_items_list.append(items)
-    s = set(unique_items_list)
+    s=set(unique_items_list)
     # s = {'article   4', 'article   6', 'article   2', 'article   1', 'article   5', 'article   3'}
-    unique_items_list = list(s)
+    unique_items_list=list(s)
     return unique_items_list
 
 # print(unique_items())
@@ -121,7 +152,7 @@ def most_similar_users(target_user,no_of_users):
 
 def target_article_to_users(target_user):
     target_user_article_lst = []
-    unique_list = unique_items()
+    unique_list =unique_items()
     for articles in dataset[target_user]:
         target_user_article_lst.append(articles)
     s = set(unique_list)
@@ -173,7 +204,7 @@ def recommendation_phase(user):
 
 # print(recommendation_phase('D'))
 # Output:
-# [(3.666666666666667, 'article 2'), (3.479274057836309, 'article 1'), (2.333333333333333, 'article 5')]
+# [(3.666666666666667, 'article   2'), (3.479274057836309, 'article   1'), (2.333333333333333, 'article   5')]
 
 print("Enter the target user")
 tp = input().title()
@@ -187,10 +218,3 @@ if tp in dataset.keys():
         print("No more recommendation needed!")
 else:
     print("user not found in the dataset..please try again")
-    
-# Enter the target user:
-# D
-# Recommendation Using User based Collaborative Filtering:  
-# article 2 ----> 3.666666666666667
-# article 1 ----> 3.479274057836309
-# article 5 ----> 2.333333333333333

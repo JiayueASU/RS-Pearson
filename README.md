@@ -138,7 +138,10 @@ print(unique_items())
 ```
 
 Out [3]:
+
+```python
 ['article 1', 'article 2', 'article 3', 'article 4', 'article 5', 'article 6']
+```
 
 ### Step 3: User-based Collaborative Filtering Algorithm (Pearson Similarity)
 
@@ -240,5 +243,3 @@ def recommendation_phase(user):
     recommendataions_list = [(recommend_item,score) for score, recommend_item in rankings]
     return recommendataions_list
 ```
-
-
