@@ -40,9 +40,10 @@ We use a nested dictionary to store all the information about users, articles, a
 In [1]: 
 
 ```python
-# Import libraries and functions you need
+# Since we need a nested dictionary to store data, collections is imported.
 import pandas as pd
 from math import sqrt
+import collections
 ```
 
 In [2]: 
@@ -84,9 +85,29 @@ Out [1]:
 | article 5 |  2   | Null |
 | article 6 |  3   |  4   |
 
+In [4]:
+```python
+def readingFile(filename):
+    # If you need to load your data from a .csv file
+    f = open(filename, "r", encoding = 'UTF-8-sig')
+    temp = []
+    for row in f:
+        r = row.split(',')
+        e = [r[0], r[1], int(r[2])]
+        temp.append(e)
+    dataset = collections.defaultdict(dict)
+    for data in temp:
+        dataset[data[0]][data[1]] = data[2]
+    return dataset
+print(readingFile("dataset.csv")
+```
+
+Out [2]:
+defaultdict(<class 'dict'>, {'A': {'1': 5, '2': 3, '5': 2, '4': 3, '6': 3, '3': 3}, 'B': {'1': 5, '5': 3, '2': 3, '4': 5, '3': 5, '6': 3}, 'D': {'3': 5, '4': 4, '6': 4}, 'F': {'6': 3, '4': 5, '5': 3, '3': 4, '1': 3}, 'E': {'1': 4, '3': 4, '2': 4, '6': 3, '5': 2}, 'C': {'6': 4, '3': 5, '1': 2, '4': 3}, 'G': {'4': 4, '3': 4, '5': 1}})
+
 ### Step 2: Generate a list to store all unique items
 
-In [4]:
+In [5]:
 
 ```Python
 def unique_items():
@@ -102,8 +123,7 @@ def unique_items():
 print(unique_items())
 ```
 
-Out [2]:
-
+Out [3]:
 ['article 1', 'article 2', 'article 3', 'article 4', 'article 5', 'article 6']
 
 ### Step 3: User-based Collaborative Filtering Algorithm (Pearson Similarity)
@@ -114,8 +134,7 @@ Suppose we have an *M* × *N* matrix of ratings, with *M* users and *N* article.
 
 <img src="https://github.com/JiayueASU/RS_Pearson/blob/main/pearson_sim.png?raw=true" width=50% height=50%>
 
-In [5]:
-
+In [6]:
 ```python
 def user_corelation(user1,user2):
     both_rated = {}
@@ -152,8 +171,7 @@ def user_corelation(user1,user2):
         return r
 ```
 
-In [6]:
-
+In [7]:
 ```python
 def most_similar_users(target_user,no_of_users):    
     # Using list comprehension for finding pearson similarity between users
